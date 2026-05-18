@@ -1,9 +1,16 @@
 export const windammit = {
-  name: "Rando Ralph", // a cute name
-  icon: "-", // an image link
+  name: "Win Dammit!",
+  icon: "", // put your image here
   getNextCard: (hand, targets, opponentPlays) => {
-    // Play a random card!
-    let index = Math.floor(Math.random() * hand.length);
-    return hand[index];
-  },
-};
+    hand.sort
+    let nextTarget = targets[targets.length - 1];
+    if (nextTarget >= 7 || nextTarget <= 10){
+      const HIGHCARD = [11, 12, 13];
+      for (let card of HIGHCARD)
+        if (hand.includes(card)){
+          return card
+        }
+    } 
+  }
+
+  }
