@@ -6,11 +6,17 @@ export const Lopes = {
     if (hand.includes(nextTarget)) {
       return nextTarget;
     }
-
-    // When the target is high, play the highest card; otherwise preserve high cards.
-    if (nextTarget >= 10) {
-      return Math.max(...hand);
+    // Lopes is a 
+    // Placeholder AI: When the target is high, play the highest card; otherwise preserve high cards.
+    switch (true) {
+      case nextTarget >= 6:
+        return Math.max(...hand);
+        break;
+        case nextTarget <= 3:
+        return Math.min(...hand);
+        break;
+      default:
+        return Math.random(...hand);
     }
-    return Math.min(...hand);
   },
 };
