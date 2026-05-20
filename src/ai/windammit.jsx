@@ -1,28 +1,37 @@
-const detectSandbagging = (targets, opponentPlays) => {
-  const flattenedPlays = opponentPlays.flat();
-  if (flattenedPlays.length < 3) {
-    return false;
-  }
+const isSandbagPlay = (target, play) => {
+  return target >= 9 && target <= 10 && play <= target - 3;
+};
 
-  let sandbagRounds = 0;
-  let relevantRounds = 0;
+const detectSandbagging = (targets, opponentPlays) => {
+  const candidateRounds = [];
 
   for (let round = 0; round < targets.length; round++) {
     const target = targets[round];
-    if (target >= 9) {
-      relevantRounds += 1;
+    if (target === 9 || target === 10) {
       const roundPlays = opponentPlays
         .map((plays) => plays[round])
         .filter((play) => typeof play === "number");
-      for (let play of roundPlays) {
-        if (play <= 5 || play <= target - 3) {
-          sandbagRounds += 1;
-        }
+      if (roundPlays.length > 0) {
+        candidateRounds.push({ target, plays: roundPlays });
       }
     }
   }
 
-  return relevantRounds > 0 && sandbagRounds / relevantRounds >= 0.5;
+  if (candidateRounds.length < 3) {
+    return false;
+  }
+
+  let sandbagRoundCount = 0;
+  let totalRounds = candidateRounds.length;
+
+  for (let { target, plays } of candidateRounds) {
+    const roundSandbags = plays.filter((play) => isSandbagPlay(target, play)).length;
+    if (roundSandbags === plays.length) {
+      sandbagRoundCount += 1;
+    }
+  }
+
+  return sandbagRoundCount / totalRounds >= 0.66;
 };
 
 const originalWindammitStrategy = (hand, nextTarget) => {
@@ -49,12 +58,13 @@ const antiSandbaggingStrategy = (hand, nextTarget) => {
   const lowest = sortedHand[0];
 
   if (nextTarget >= 11) {
-    return lowest;
+    const candidate = sortedHand.find((card) => card > nextTarget);
+    return candidate !== undefined ? candidate : lowest;
   }
 
-  if (nextTarget >= 7 && nextTarget <= 10) {
+  if (nextTarget === 9 || nextTarget === 10) {
     const candidate = sortedHand.find((card) => card > nextTarget);
-    return candidate !== undefined ? candidate : Math.max(...sortedHand);
+    return candidate !== undefined ? candidate : lowest;
   }
 
   return lowest;
