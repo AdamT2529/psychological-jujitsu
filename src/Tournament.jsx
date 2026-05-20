@@ -48,7 +48,7 @@ function playMatch(ais, rounds) {
         const card = ai.getNextCard(
           [...hands[idx]],
           targetsSoFar,
-          played.filter((_, i) => i !== idx)
+          played.filter((_, i) => i !== idx),
         );
         return isValid(card, hands[idx]) ? card : -1;
       });
@@ -64,7 +64,7 @@ function playMatch(ais, rounds) {
     const roundPts = captured.map((cs) => cs.reduce((sum, c) => sum + c, 0));
     const maxPts = Math.max(...roundPts);
     const roundWinners = roundPts.flatMap((pts, i) =>
-      pts === maxPts ? [i] : []
+      pts === maxPts ? [i] : [],
     );
     if (roundWinners.length === 1) {
       wins[roundWinners[0]]++;
@@ -82,7 +82,7 @@ function playMatch(ais, rounds) {
       ? prelim[0]
       : prelim.reduce(
           (best, i) => (totals[i] > totals[best] ? i : best),
-          prelim[0]
+          prelim[0],
         );
 
   const tie =
@@ -389,12 +389,13 @@ export const Tournament = ({ availableAIs }) => {
   // ----- UI actions
   const toggleAI = (ai, checked) => {
     setSelected((prev) =>
-      checked ? [...prev, ai] : prev.filter((a) => a.name !== ai.name)
+      checked ? [...prev, ai] : prev.filter((a) => a.name !== ai.name),
     );
   };
 
   const startTournament = () => {
     const combos = combinationsOfThree(selected);
+    combos.sort((a, b) => Math.random() - 0.5); // shuffle for variety
     setMatchups(combos);
     setMatchResults(Array(combos.length));
     setCurrentIdx(0);
@@ -439,8 +440,8 @@ export const Tournament = ({ availableAIs }) => {
               currentAnim.phase === "showing"
                 ? "translateY(0) scale(1)"
                 : currentAnim.phase === "fading"
-                ? "translateY(40px) scale(0.95)"
-                : "translateY(-40px) scale(0.95)",
+                  ? "translateY(40px) scale(0.95)"
+                  : "translateY(-40px) scale(0.95)",
             transition: "transform 0.5s, opacity 0.5s",
           }}
         >
