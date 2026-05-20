@@ -6,11 +6,14 @@ export const windammit = {
     let nextTarget = targets[targets.length - 1];
     if (nextTarget >= 7 || nextTarget <= 10){
       const HIGHCARD = [11, 12, 13];
-      for (let card of HIGHCARD)
+      for (let card of HIGHCARD) {
         if (hand.includes(card)){
-          return card
+          return card;
         }
-    } return Math.max(...hand)
-  } return Math.min(...hand)
+      }
+      return Math.max(...hand)
+    } 
+    return Math.min(...hand)
+  },
 
-  }
+  };
