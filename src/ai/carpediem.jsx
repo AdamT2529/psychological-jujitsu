@@ -24,13 +24,13 @@ export const sandbagging = {
       allCards.filter(card => !cardsPlayed.includes(card))
     );
 
-    const estimatedOpponentBid = Math.round(nextTarget * 0.8);
+    const estimatedOpponentBid = Math.round(nextTarget * 0.9);
 
-    if (nextTarget <= 7) {
+    if (nextTarget <= 6) {
       return sortedHand[0];
     }
 
-    if (nextTarget >= 8) {
+    if (nextTarget >= 7) {
       const winningCard = sortedHand.find(card => card > estimatedOpponentBid);
       if (winningCard) return winningCard;
       return sortedHand[sortedHand.length - 1];
