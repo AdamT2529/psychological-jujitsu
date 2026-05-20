@@ -31,8 +31,10 @@ import { MetaMind } from "./ai/MetaMind";
 import { takeSureBetsAi } from "./ai/takeSureBets";
 import { tronAi } from "./ai/tronAI";
 import { Tournament } from "./Tournament";
+import { sandbagging } from "./ai/carpediem";
 import { windammit } from "./ai/windammit";
 import { hinkle26 } from "./ai/hinkle26";
+
 
 
 const availableAIs = [
@@ -58,6 +60,7 @@ const availableAIs = [
   hinkleAi,
   jimminyCricketAI,
   orderedDummy,
+  sandbagging,
   windammit,
 ];
 
