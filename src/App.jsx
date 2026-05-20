@@ -14,6 +14,7 @@ import { sortOfSmart } from "./ai/sortOfSmartAI";
 import { hinkleAi } from "./ai/hinkleAi";
 import { brucienAI } from "./ai/brucienAi";
 import { emoRAI } from "./ai/Emor";
+import { atomAi } from "./ai/atom";
 import { SimulatorUi } from "./Simulator";
 import { generateHand, getWinnerIndex } from "./gameLogic";
 import { randoAI } from "./ai/randomAI";
@@ -32,8 +33,8 @@ import { takeSureBetsAi } from "./ai/takeSureBets";
 import { tronAi } from "./ai/tronAI";
 import { Tournament } from "./Tournament";
 
-
 const availableAIs = [
+  atomAi,
   tronAi,
   takeSureBetsAi,
   sampleAi,
@@ -55,8 +56,6 @@ const availableAIs = [
   hinkleAi,
   jimminyCricketAI,
   orderedDummy,
-
-
 ];
 
 const GameUI = ({ availableAIs }) => {
@@ -71,7 +70,7 @@ const GameUI = ({ availableAIs }) => {
     "robots",
   ];
   const [numberOfAIs, setNumberOfAIs] = useState(2); // may never change
-  const [ais, setAIs] = useState([sortOfSmart, targetDummy]);
+  const [ais, setAIs] = useState([atomAi, targetDummy]);
   const [trash, setTrash] = useState([]);
   const [humanHand, setHumanHand] = useState(generateHand());
 
@@ -125,7 +124,7 @@ const GameUI = ({ availableAIs }) => {
       let card = ai.getNextCard(
         [...myHand],
         targetsSoFar,
-        playedCards.filter((pp) => pp != myPlayed)
+        playedCards.filter((pp) => pp != myPlayed),
       );
       if (!isValid(card, myHand)) {
         window.alert("Invalid card played by AI", card);
@@ -135,7 +134,7 @@ const GameUI = ({ availableAIs }) => {
           "played from hand",
           myHand,
           "by AI",
-          ai
+          ai,
         );
         throw new Error("Invalid Card");
       }
@@ -143,13 +142,13 @@ const GameUI = ({ availableAIs }) => {
     });
     cardsPlayedThisRound = [...cardsPlayedThisRound, ...humanCards];
     setPlayedCards(
-      playedCards.map((played, idx) => [...played, cardsPlayedThisRound[idx]])
+      playedCards.map((played, idx) => [...played, cardsPlayedThisRound[idx]]),
     );
     // Remove played cards from list of cards
     setHands(
       hands.map((hand, idx) =>
-        hand.filter((card) => card !== cardsPlayedThisRound[idx])
-      )
+        hand.filter((card) => card !== cardsPlayedThisRound[idx]),
+      ),
     );
     // Finally, let's update the winner and the target...
     // Pick the winner, and update...

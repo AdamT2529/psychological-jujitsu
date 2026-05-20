@@ -12,5 +12,8 @@ export const atomAi = {
         return yes ? 2 : 3 
       } else if (nextTarget === 4) {
         return 3;
-      } else if (nextTarget === ) {
-};
+      //} else if (nextTarget === ) {
+      }
+    }
+  }
+}
