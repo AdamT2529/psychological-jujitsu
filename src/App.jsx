@@ -30,16 +30,11 @@ import { megamente } from "./ai/Megamente";
 import { MetaMind } from "./ai/MetaMind";
 import { takeSureBetsAi } from "./ai/takeSureBets";
 import { tronAi } from "./ai/tronAI";
-import { learningMan } from "./ai/learningMan";
 import { Tournament } from "./Tournament";
 import { hinkle26 } from "./ai/hinkle26";
-import { mrPatient } from "./ai/mrPatient";
-import { scoreKeeper } from "./ai/scoreKeeper";
+
 const availableAIs = [
-  scoreKeeper,
   hinkle26,
-  learningMan,
-  mrPatient,
   tronAi,
   takeSureBetsAi,
   sampleAi,
