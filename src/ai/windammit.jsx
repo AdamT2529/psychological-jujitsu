@@ -10,7 +10,7 @@ export const windammit = {
         if (hand.includes(card)){
           return card
         }
-    } 
-  }
+    } return Math.max(...hand)
+  } return Math.min(...hand)
 
   }
