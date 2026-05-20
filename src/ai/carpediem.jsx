@@ -14,40 +14,25 @@ export const sandbagging = {
   name: "Sandbagging",
   icon: "🏖️",
   getNextCard: (hand, targets, opponentPlays) => {
-    const nextTarget = targets[targets.length - 1];
+    const nextTarget = targets[targets.length - 1]; 
     const sortedHand = [...hand].sort((a, b) => a - b);
     const allCards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
-    
-    // Infer what opponents have left
-    const opponentRemainingHands = opponentPlays.map(cardsPlayed => 
+
+    if (!nextTarget || hand.length === 0) return sortedHand[0];
+
+    const opponentRemainingHands = opponentPlays.map(cardsPlayed =>
       allCards.filter(card => !cardsPlayed.includes(card))
     );
-    
-    const maxOpponentCard = Math.max(
-      ...opponentRemainingHands.map(h => h.length > 0 ? Math.max(...h) : 0)
-    );
 
-    // Concede low prizes (1-7): play minimum to waste opponent cards
+    const estimatedOpponentBid = Math.round(nextTarget * 0.8);
+
     if (nextTarget <= 7) {
       return sortedHand[0];
     }
 
-    // Contest high prizes (8-13): play to WIN or conserve
     if (nextTarget >= 8) {
-      // Try to win with the smallest card that beats opponent max
-      const winningCard = sortedHand.find(card => card > maxOpponentCard);
-      if (winningCard) {
-        return winningCard; // Play just enough to win
-      }
-      
-      // Can't win - try to play one number higher to guarantee win
-      const cardOneHigher = maxOpponentCard + 1;
-      if (cardOneHigher <= 13 && hand.includes(cardOneHigher)) {
-        return cardOneHigher;
-      }
-
-      // If can't play one higher, gamble with highest card
-      // (they might not have it if they haven't used their King yet)
+      const winningCard = sortedHand.find(card => card > estimatedOpponentBid);
+      if (winningCard) return winningCard;
       return sortedHand[sortedHand.length - 1];
     }
   }
