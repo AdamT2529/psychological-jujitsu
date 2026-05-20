@@ -31,8 +31,7 @@ import { MetaMind } from "./ai/MetaMind";
 import { takeSureBetsAi } from "./ai/takeSureBets";
 import { tronAi } from "./ai/tronAI";
 import { Tournament } from "./Tournament";
-import { windammit } from "./ai/windammit.jsx";
-
+import { windammit } from "./ai/windammit";
 
 const availableAIs = [
   tronAi,
@@ -56,8 +55,7 @@ const availableAIs = [
   hinkleAi,
   jimminyCricketAI,
   orderedDummy,
-
-
+  windammit,
 ];
 
 const GameUI = ({ availableAIs }) => {
@@ -126,7 +124,7 @@ const GameUI = ({ availableAIs }) => {
       let card = ai.getNextCard(
         [...myHand],
         targetsSoFar,
-        playedCards.filter((pp) => pp != myPlayed)
+        playedCards.filter((pp) => pp != myPlayed),
       );
       if (!isValid(card, myHand)) {
         window.alert("Invalid card played by AI", card);
@@ -136,7 +134,7 @@ const GameUI = ({ availableAIs }) => {
           "played from hand",
           myHand,
           "by AI",
-          ai
+          ai,
         );
         throw new Error("Invalid Card");
       }
@@ -144,13 +142,13 @@ const GameUI = ({ availableAIs }) => {
     });
     cardsPlayedThisRound = [...cardsPlayedThisRound, ...humanCards];
     setPlayedCards(
-      playedCards.map((played, idx) => [...played, cardsPlayedThisRound[idx]])
+      playedCards.map((played, idx) => [...played, cardsPlayedThisRound[idx]]),
     );
     // Remove played cards from list of cards
     setHands(
       hands.map((hand, idx) =>
-        hand.filter((card) => card !== cardsPlayedThisRound[idx])
-      )
+        hand.filter((card) => card !== cardsPlayedThisRound[idx]),
+      ),
     );
     // Finally, let's update the winner and the target...
     // Pick the winner, and update...
