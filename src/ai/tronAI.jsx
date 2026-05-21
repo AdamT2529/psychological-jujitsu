@@ -33,7 +33,7 @@ export const tronAi = {
         }
       }
     }
-    console.log("isDrake:", isDrake, "isAntiDrake:", isAntiDrake);
+    //console.log("isDrake:", isDrake, "isAntiDrake:", isAntiDrake);
 
     // If both detected (very rare, but possible if ambiguous), prioritize anti-Drake
     if (isDrake && isAntiDrake) {
