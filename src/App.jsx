@@ -15,6 +15,7 @@ import { sortOfSmart } from "./ai/sortOfSmartAI";
 import { hinkleAi } from "./ai/hinkleAi";
 import { brucienAI } from "./ai/brucienAi";
 import { emoRAI } from "./ai/Emor";
+import { atomAi } from "./ai/atom";
 import { SimulatorUi } from "./Simulator";
 import { generateHand, getWinnerIndex } from "./gameLogic";
 import { randoAI } from "./ai/randomAI";
@@ -37,8 +38,8 @@ import { windammit } from "./ai/windammit";
 import { hinkle26 } from "./ai/hinkle26";
 
 
-
 const availableAIs = [
+  atomAi,
   hinkle26,
   tronAi,
   Lopes,
@@ -78,7 +79,7 @@ const GameUI = ({ availableAIs }) => {
     "robots",
   ];
   const [numberOfAIs, setNumberOfAIs] = useState(2); // may never change
-  const [ais, setAIs] = useState([sortOfSmart, targetDummy]);
+  const [ais, setAIs] = useState([atomAi, targetDummy]);
   const [trash, setTrash] = useState([]);
   const [humanHand, setHumanHand] = useState(generateHand());
 
