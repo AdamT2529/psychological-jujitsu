@@ -1,5 +1,4 @@
 import "./App.css";
-import { Lopes } from "./ai/Lopes";
 import { Card } from "./Card";
 import { Hand } from "./Hand";
 import { CardsPlayed } from "./CardsPlayed";
@@ -42,7 +41,6 @@ const availableAIs = [
   atomAi,
   hinkle26,
   tronAi,
-  Lopes,
   takeSureBetsAi,
   sampleAi,
   madDummyAi,
